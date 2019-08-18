@@ -1,0 +1,45 @@
+Python version 3.x
+
+Install opencv if not present
+Command : pip install opencv-python
+
+Install flask if not present
+Command : pip install flask
+
+Run the python file "process.py"
+Command : python process.py
+
+You will get this message :
+
+	 * Serving Flask app "process" (lazy loading)
+	 * Environment: production
+	   WARNING: This is a development server. Do not use it in a production deployment.
+	   Use a production WSGI server instead.
+	 * Debug mode: on
+	 * Running on http://127.0.0.1:8080/ (Press CTRL+C to quit)
+	 * Restarting with stat
+	 * Debugger is active!
+	 * Debugger PIN: 521-484-833
+
+Copy the url http://127.0.0.1:8080/ and paste it in the browser
+
+You will get a webpage containing 5 quiz questions.
+
+Also your live webcam feed will be displayed.
+
+The time taken to answer every question will also be calculated and displayed in the page.
+
+To stop the webcam window, press the key 'q'.
+
+To stop the server, press Ctrl+C in the terminal.
+
+After you complete all the 5 questions, result will be displayed along with total time taken.
+The webcam video feed will be saved in the current directory which can be used for later video analysis. Filename - output.avi
+
+Multithreading :
+The functions capture() and timer() are being run simultaneously as two different threads. 
+More threads can be added to call the necessary functions accordingly.
+
+
+
+
