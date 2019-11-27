@@ -1,25 +1,26 @@
 (function() {
   var questions = [{
-    question: "What is 2*5?",
-    choices: [2, 5, 10, 15, 20],
+    question: "What is the built in library function to adjust the allocated dynamic memory size?",
+    choices: [ 'malloc', 'calloc', 'realloc','resize'],
     correctAnswer: 2
   }, {
-    question: "What is 3*6?",
-    choices: [3, 6, 9, 12, 18],
-    correctAnswer: 4
-  }, {
-    question: "What is 8*9?",
-    choices: [72, 99, 108, 134, 156],
-    correctAnswer: 0
-  }, {
-    question: "What is 1*7?",
-    choices: [4, 5, 6, 7, 8],
+    question: "Choose the invalid predefined macro as per ANSI C?",
+    choices: ['__FILE__','__DATE__','__TIME__','__C++__'],
     correctAnswer: 3
   }, {
-    question: "What is 8*8?",
-    choices: [20, 30, 40, 50, 64],
-    correctAnswer: 4
+    question: "The prototype of a function can be used to?",
+    choices: ['Define a function','Declare a function','Erase a function','None of the above'],
+    correctAnswer: 1
+  }, {
+    question: "Why to use fflush() library function?",
+    choices: ['To flush all streams and specified streams','To flush only specified stream','To flush input/output buffer','Invalid library function'],
+    correctAnswer: 0
+  }, {
+    question: "Choose the correct unary operators in C –   a) !,   b) ~,    c) ^&,    d) ++",
+    choices: [ 'a, b, d','a, b, c','b, c, d','c, d, a'],
+    correctAnswer: 0
   }];
+  
   
   var questionCounter = 0; //Tracks question number
   var selections = []; //Array containing user choices
@@ -27,10 +28,12 @@
   
   // Display initial question
   displayNext();
-  
   // Click handler for the 'next' button
   // $('#next').on('click', function (e) {
+    var a=0; 
+    var i=0;
   $('#next').click(function (e) {
+    a=0;
     e.preventDefault();
     
     // Suspend click listener during fade animation
@@ -43,10 +46,26 @@
     if (isNaN(selections[questionCounter])) {
       alert('Please make a selection!');
     } else {
+      // selections[i] === questions[i].correctAnswer ? a=1 :a=0
+      if (selections[i] === questions[i].correctAnswer) {
+        a=1
+      }
+      else {
+        a=0;
+      }
+      i++;
+
+      $.ajax({
+	      type:'POST',
+          url: 'foo',
+          data:{answer:a},
+	    });
+       
+      //alert('outside if loop');
       questionCounter++;
       displayNext();
-
     }
+    
 
 //
     // $.ajax({
@@ -118,7 +137,7 @@
     var radioList = $('<ul>');
     var item;
     var input = '';
-    for (var i = 0; i < questions[index].choices.length; i++) {
+    for (var i = 0; i < 4; i++) {
       item = $('<li>');
       input = '<input type="radio" name="answer" value=' + i + ' />';
       input += questions[index].choices[i];
@@ -163,10 +182,19 @@
     });
   }
   
+  function answersend(){
+    var a=0;
+    var i=0;
+    if (selections[i] === questions[i].correctAnswer) {
+      a=1;
+    }
+    i++;
+    return a
+  }
+  
   // Computes score and returns a paragraph element to be displayed
   function displayScore() {
-    var score = $('<p>',{id: 'question'});
-    
+    var score = $('<p>',{id: 'question'}); 
     var numCorrect = 0;
     for (var i = 0; i < selections.length; i++) {
       if (selections[i] === questions[i].correctAnswer) {

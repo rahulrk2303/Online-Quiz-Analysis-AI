@@ -3,8 +3,8 @@ from scipy.spatial import distance as dist
 from imutils.video import FileVideoStream
 from imutils.video import VideoStream
 from imutils import face_utils
-import argparse
 import imutils
+import argparse
 import time
 import dlib
 import cv2
@@ -36,14 +36,21 @@ def eye_aspect_ratio(eye):
 # ap.add_argument("-f", "--frames", type = int, default=2,
 #         help="the number of consecutive frames the eye must be below the threshold")
 
+COUNTER = 0
+TOTAL = 0
+
+def blink_count():
+    global TOTAL
+    return TOTAL
+
 def func(vs=None):
     # args = vars(ap.parse_args())
     EYE_AR_THRESH = 0.27
     EYE_AR_CONSEC_FRAMES = 2
 
     # initialize the frame counters and the total number of blinks
-    COUNTER = 0
-    TOTAL = 0
+    global COUNTER
+    global TOTAL
 
     # initialize dlib's face detector (HOG-based) and then create
     # the facial landmark predictor
@@ -158,16 +165,16 @@ def func(vs=None):
                                 
     
         # text_file = open('mals.txt', 'w')
-    #text_file.write('\nTotal no. of blinks=')
+        #text_file.write('\nTotal no. of blinks=')
         # text_file.write('[')
         # text_file.write(format( TOTAL ) )
         # text_file.write(',\t' )
         # text_file.close()
     
     # do a bit of cleanup
-    print('Total no. of blinks=', TOTAL)
-    cv2.destroyAllWindows()
+    # print('Total no. of blinks=', TOTAL)
     vs.stop()
+    cv2.destroyAllWindows()
     
 # if __name__ == '__main__' :
     #parser = argparse.ArgumentParser()

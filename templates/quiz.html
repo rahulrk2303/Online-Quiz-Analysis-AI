@@ -22,20 +22,26 @@
     		<p id='time'></p>
     	</div>
   <script>
-    $('#next').click(function() {
-        $.ajax({
-              type:'POST',
-              url: "{{ url_for('foo')}}",
-              dataType:"text",
-              success: function(response){
-                 $('#time').html(response)
-              }
-      });
-    });
+ //    $('#next').click(function() {
+ //        $.ajax({
+	// 		type:'POST',
+	// 		url: 'foo',
+	// 		data: {answer:"html"}
+	// 	});				
+	// });
+	$(document).on('click', 'input[name="answer"]', function(){
+		$.ajax({
+			type:'POST',
+			url: "{{url_for('click_count')}}",
+			data:{option:$('input[name="answer"]:checked').val()},
+		});
+	});
+
+  
   </script>
 
 		<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
-		<script type="text/javascript" src='questions.json'></script>
+		<!-- <script type="text/javascript" src='questions.json'></script> -->
 		<script type='text/javascript' src="{{ url_for('static', filename='js/quiz.js')}}"></script>
 
 	</body>

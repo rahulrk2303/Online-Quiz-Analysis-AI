@@ -1,0 +1,21 @@
+$(document).on('click', 'input[name="answer"]', function(){
+	$.ajax({
+		type:'POST',
+		url: "{{ url_for('click_count')}}",
+	//	data: {option:option value(1or2or3or4)};
+	});
+});
+
+click_array arr = {0,0,0,0}
+
+click_count {
+	opt = request.form['option']
+	arr[opt]++
+	total_clicks++
+}
+
+confidence = {0,0,0,0}
+for i in range(4):
+	confidence[i]=arr[i]/total_clicks
+
+clicked_answer = ans
