@@ -62,7 +62,7 @@ def capture(cap=None):
 	out = cv2.VideoWriter('capture.avi',fourcc, 20.0, (640,480))
 	x = 0
 
-	while(True and ques<10):
+	while(True and ques<10000):
 		frame = cap.read()
 		out.write(frame)
 		# cv2.imshow('capture', frame)
@@ -106,7 +106,7 @@ i = 0
 
 def timer ():
 	
-	while (timer_run and ques<10):
+	while (timer_run and ques<10000):
 		time.sleep(1)
 		global i
 		i = i+1
@@ -127,7 +127,7 @@ def index():
 	t3 = Thread(target = blinkrate_new.func, kwargs={'vs': wvs})
 	t4 = Thread(target = expr, kwargs={'video_capture': wvs})
 	
-	if ques == 10:
+	if ques == 10000:
 		wvs.stop()
 		wvs.stream.release()
 		cv2.destroyAllWindows()
@@ -197,7 +197,8 @@ def foo():
 	# print(ans)
 	# grab reddit data and write to csv
 
-	ans = request.form.get('answer')
+	ans = int(request.form.get('answer'))
+	cans = int(request.form.get('canswer'))
 	print(ans)
 	global click_c
 	# if click_c==1:
@@ -210,9 +211,10 @@ def foo():
 	# 	avg = 0
 
 	global option_clicks
-	global opt
-	print("Option" + format(opt))
-	conf = option_clicks[opt]/click_c*100
+	# global opt
+	# print("Option" + format(opt))
+	conf = option_clicks[cans]/click_c*100
+	# conf = conf*ans
 	print("Confidence = " + format(conf))
 
 	timer_run = False
@@ -242,11 +244,11 @@ def foo():
 	elif(exp_data==3):
 		exp_send='sad'
 	elif(exp_data==4):
-		exp_send='suprise'
+		exp_send='surprise'
 	else:
 		exp_send='neutral'
 
-	option_clicks = [0,0,0,0]	
+	option_clicks = [0,0,0,0]
 	
    # doc_ref = db.collection('quiz').document('mam' + format(ques))
 	#doc_ref.set({
