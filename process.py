@@ -160,17 +160,18 @@ wb = Workbook()
   
 # add_sheet is used to create sheet. 
 sheet1 = wb.add_sheet('Sheet 1') 
-sheet1.write(0, 1, 'Q#') 
-sheet1.write(0, 2, 'Time taken') 
-sheet1.write(0, 3, 'Blink count') 
-sheet1.write(0, 4, 'Manhattan Norm') 
-sheet1.write(0, 5, 'Manhattan Zero') 
-sheet1.write(0,6,'Max of Norm')
-sheet1.write(0,7,'Max of Zero')
-sheet1.write(0, 8,'Click#')
-sheet1.write(0,9,'Confidence')
-sheet1.write(0,10,'Face Expr')
-sheet1.write(0,11,'Answer')
+sheet1.write(0, 0, 'Qno') 
+sheet1.write(0, 1, 'Time taken') 
+sheet1.write(0, 2, 'Blink count') 
+sheet1.write(0, 3, 'Manhattan Norm') 
+sheet1.write(0, 4, 'Manhattan Zero') 
+sheet1.write(0, 5, 'Max of Norm')
+sheet1.write(0, 6, 'Max of Zero')
+sheet1.write(0, 7, 'Click Count')
+sheet1.write(0, 8, 'Select Conf')
+sheet1.write(0, 9, 'Correct Conf')
+sheet1.write(0,10, 'Emotion')
+sheet1.write(0,11, 'Marks')
 
 option_clicks =[0,0,0,0]
 opt = 0
@@ -211,11 +212,13 @@ def foo():
 	# 	avg = 0
 
 	global option_clicks
-	# global opt
+	global opt
 	# print("Option" + format(opt))
-	conf = option_clicks[cans]/click_c*100
+	sconf = option_clicks[opt]/click_c*100
+	cconf = option_clicks[cans]/click_c*100
 	# conf = conf*ans
-	print("Confidence = " + format(conf))
+	print("Select Conf = " + format(sconf))
+	print("Correct Conf = " + format(cconf))
 
 	timer_run = False
 	global i
@@ -270,15 +273,16 @@ def foo():
   
 	
 
-	sheet1.write(ques,1,ques)
-	sheet1.write(ques,2,time)
-	sheet1.write(ques,3,c)
-	sheet1.write(ques,4,x)
-	sheet1.write(ques,5,y) 
-	sheet1.write(ques,6,z)
-	sheet1.write(ques,7,z1)
-	sheet1.write(ques,8,click_c)
-	sheet1.write(ques,9,conf)
+	sheet1.write(ques,0,ques)
+	sheet1.write(ques,1,time)
+	sheet1.write(ques,2,c)
+	sheet1.write(ques,3,x)
+	sheet1.write(ques,4,y) 
+	sheet1.write(ques,5,z)
+	sheet1.write(ques,6,z1)
+	sheet1.write(ques,7,click_c)
+	sheet1.write(ques,8,sconf)
+	sheet1.write(ques,9,cconf)
 	sheet1.write(ques,10,exp_send)
 	sheet1.write(ques,11,ans)
 	wb.save('xlwt example.xls')
